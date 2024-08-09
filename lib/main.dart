@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:responsive_layout_demo/orientation_builder_demo.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:responsive_layout_demo/responsive-framework/responsive.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -13,8 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: OrientationList(),
+    return MaterialApp(
+      builder: (context, widget) => ResponsiveBreakpoints(breakpoints: const [
+        Breakpoint(start: 0, end: 600, name: MOBILE),
+        Breakpoint(start: 600, end: double.infinity, name: DESKTOP)
+      ], child: widget!),
+      home: const Responsive(),
     );
   }
 }
